@@ -8,7 +8,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #4a90e2;
+    color: #043565
 }
 
 form {
@@ -18,6 +18,7 @@ form {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 600px;
 }
 
 label {
@@ -27,7 +28,7 @@ label {
 }
 
 input[type="file"] {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin-bottom: 20px;
     border: 2px solid #ddd;
@@ -51,11 +52,12 @@ input[type="submit"]:hover {
 
 h2 {
     text-align: center;
-    color: #4caf50;
+    color: #e74c3c;
 }
 
 h3 {
     text-align: center;
+    color: #e74c3c;
 }
 
 img {
@@ -63,18 +65,13 @@ img {
     margin: 20px auto;
     max-width: 100%;
     max-height: 300px;
+    border: 20px solid #000000;
+    border-radius: 10px;
+    padding: 1px;
 }
 
 .result {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-}
-
-.result.cancer {
-    color: #e74c3c;
-}
-
-.result.not-cancer {
-    color: #2ecc71;
 }

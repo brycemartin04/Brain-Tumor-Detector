@@ -4,28 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brain Tumor Detector</title>
-    <link rel="icon" type="image/x-icon" href="brain.png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='brain.png') }}">
     <link rel="stylesheet" href="/static/css/styles.css">  <!-- Correct link to CSS -->
 </head>
 <body>
     <h1>Brain Tumor Detector</h1>
-    {% if image_url %}
-        <img src="{{ image_url }}" alt="Uploaded Image">
+    {% if predicted_image_path %}
+        <img src="{{ predicted_image_path }}" alt="Uploaded Image">
     {% endif %}
     {% if result %}
-        <h2 class="result {{ 'cancer' if result == 'Cancer' else 'not-cancer' }}">
+        <h2 class="result.cancer">
             Prediction Result: {{ result }}
         </h2>
-        <h2 class = 'result.not-cancer'> Confidence: {{ confidence | round(2) }}%</h2>
+    {% endif %}
+    {% if confidence %}
+        <h2 class = 'result.not-cancer'> Confidence: {{ (confidence * 100) | round(2) }}%</h2>
     {% endif %}
     <form action="/" method="post" enctype="multipart/form-data">
         <label for="file">Upload an MRI Scan:</label>
         <input type="file" name="file" accept="image/*" required>
         <input type="submit" value="Predict">
     </form>
-
-    
-
-    
 </body>
 </html>
