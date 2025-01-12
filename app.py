@@ -38,7 +38,7 @@ def cleanup_temp_folder():
         print("Temp folder does not exist.")
 
 # Register the cleanup function to be called on app close
-#atexit.register(cleanup_temp_folder)
+atexit.register(cleanup_temp_folder)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

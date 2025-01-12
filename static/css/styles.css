@@ -21,7 +21,7 @@ h1 {
 
 form {
     max-width: 700px;
-    margin: 50px auto;
+    margin: auto;
     padding: 30px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
@@ -54,7 +54,7 @@ input[type="file"]:focus {
 }
 
 input[type="submit"] {
-    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    background: linear-gradient(135deg, #00d0ff, #5c7ea0);
     color: white;
     padding: 15px 30px;
     border: none;
@@ -100,6 +100,12 @@ img {
 
 .green {
     color: green;
+}
+
+.container {
+    min-height: 5vh;
+    padding: 20px; /* Add padding to space out from edges */
+    box-sizing: border-box; /* Makes padding not affect the width */
 }
 
 
