@@ -66,46 +66,49 @@ def index():
             image_url = f'static/temp/{filename}'
            
             if previous_image != None:
-                os.remove(previous_image)
+                if os.path.exists(previous_image):
+                    os.remove(previous_image)
                 previous_image = None
 
             if previous_prediction != None:
-                os.remove(previous_prediction)
+                if os.path.exists(previous_prediction):
+                    os.remove(previous_prediction)
                 previous_prediction = None
 
             
             previous_image = f'static/temp/{filename}'
 
-            results = model(image_url)
-            if len(results[0].boxes.cls) !=0:
-                labels = results[0].boxes.cls[0].item()  # This will give you the class names
-                confidence = results[0].boxes.conf[0].item()  # Confidence scores for each prediction
-            else: 
-                labels = "No Cancer Detected"
+            if os.path.exists(img_path):
+                results = model(image_url)
+                if len(results[0].boxes.cls) !=0:
+                    labels = results[0].boxes.cls[0].item()  # This will give you the class names
+                    confidence = results[0].boxes.conf[0].item()  # Confidence scores for each prediction
+                else: 
+                    labels = "No Cancer Detected"
 
-            if labels == 1:
-                labels = 'Meningioma'
-            elif labels == 2:
-                labels = "Pituitary"
-            elif labels == 0:
-                labels = "Glioma"
+                if labels == 1:
+                    labels = 'Meningioma'
+                elif labels == 2:
+                    labels = "Pituitary"
+                elif labels == 0:
+                    labels = "Glioma"
 
             
 
-            # Get the predicted image from YOLO result (use OpenCV to work with the image)
-            predicted_image = results[0].plot(labels=True, conf=False)  # Plot the predictions onto the image
+                # Get the predicted image from YOLO result (use OpenCV to work with the image)
+                predicted_image = results[0].plot(labels=True, conf=False)  # Plot the predictions onto the image
 
-            # Convert the result to a format we can save
-            # 'predicted_image' is an array, so convert it to a PIL Image
-            predicted_image_pil = Image.fromarray(predicted_image)
+                # Convert the result to a format we can save
+                # 'predicted_image' is an array, so convert it to a PIL Image
+                predicted_image_pil = Image.fromarray(predicted_image)
 
-            # Save the predicted image manually
-            predicted_image_path = os.path.join('static/temp/predict', filename)
-            predicted_image_pil.save(predicted_image_path)
+                # Save the predicted image manually
+                predicted_image_path = os.path.join('static/temp/predict', filename)
+                predicted_image_pil.save(predicted_image_path)
 
-            # Set the URL for the predicted image
-            predicted_image_path = f'static/temp/predict/{filename}'
-            previous_prediction = predicted_image_path
+                # Set the URL for the predicted image
+                predicted_image_path = f'static/temp/predict/{filename}'
+                previous_prediction = predicted_image_path
             
 
             
