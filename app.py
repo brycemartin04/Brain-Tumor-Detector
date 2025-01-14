@@ -43,6 +43,7 @@ atexit.register(cleanup_temp_folder)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     labels = ''
+    status = ''
     image_url = None
     confidence = None
     predicted_image_path= None
@@ -109,11 +110,13 @@ def index():
                 # Set the URL for the predicted image
                 predicted_image_path = f'static/temp/predict/{filename}'
                 previous_prediction = predicted_image_path
-            
+            elif image_url != None:
+                print (image_url)
+                status = 'Error loading File, Please Try Again'
 
             
     
-    return render_template('index.html', result=labels, predicted_image_path=predicted_image_path, confidence=confidence)
+    return render_template('index.html', result=labels, status = status, predicted_image_path=predicted_image_path, confidence=confidence)
 
 if __name__ == "__main__":
     app.run(debug=True)

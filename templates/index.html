@@ -8,15 +8,28 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
 </head>
 <body>
-    <h1>Brain Tumor Detector</h1>
+    <div class="title-container">
+        <div class="logo-container">
+            <img src="static/brain.png" alt="Logo" class="logo">
+        </div>
+        <h1>Brain Tumor Detector</h1>
+    </div>
     
+    {% if status %}
+        <h2 class = "error">
+            {{status}}
+        </h2>
+    {% endif %}
+
+    <div class="prediction-background">
     {% if predicted_image_path %}
-        <img src="{{ predicted_image_path }}" alt="Uploaded MRI Scan">
+        <img src="{{ predicted_image_path }}" alt="Uploaded MRI Scan" class="predicted-image">
     {% endif %}
     
     {% if result %}
         <h2 class="{{ 'green' if result == 'No Cancer Detected' else '' }}">
             Prediction Result: {{ result }}
+
         </h2>
     {% endif %}
     
@@ -25,6 +38,8 @@
             Confidence: {{ (confidence * 100) | round(2) }}%
         </h2>
     {% endif %}
+    </div>
+
     <div class="container">
     <form action="/" method="post" enctype="multipart/form-data">
         <label for="file">Upload an MRI Scan:</label>
