@@ -6,13 +6,31 @@
     <title>Brain Tumor Detector</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='brain.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> 
+    <script>
+        // Function to toggle the display of more information
+        function showMoreInfo() {
+            const info = document.getElementById('more-info');
+            const button = document.getElementById('more-info-btn');
+            if (info.style.display === "none" || info.style.display === "") {
+                info.style.display = "block";
+                button.textContent = "Hide Information";
+            } else {
+                info.style.display = "none";
+                button.textContent = "More Information";
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="title-container">
+        <a href="/">
         <div class="logo-container">
-            <img src="static/brain.png" alt="Logo" class="logo">
+                <img src="static/brain.png" alt="Logo" class="logo">
         </div>
+        </a>
+        <a href="/">
         <h1>Brain Tumor Detector</h1>
+        </a>
     </div>
     
     {% if status %}
@@ -37,9 +55,16 @@
         <h2>
             Confidence: {{ (confidence * 100) | round(2) }}%
         </h2>
+        <button id="more-info-btn" onclick="showMoreInfo()">More Information</button>
+            
     {% endif %}
-    </div>
 
+
+    </div>
+    <div id="more-info" style="display:none; margin-top: 20px;" class="more-info">
+        <p>{{ info }}</p>
+        
+    </div>
     <div class="container">
     <form action="/" method="post" enctype="multipart/form-data">
         <label for="file">Upload an MRI Scan:</label>
@@ -48,4 +73,5 @@
     </form>
     </div>
 </body>
+
 </html>

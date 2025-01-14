@@ -1,8 +1,7 @@
 /* static/css/styles.css */
-body, html {
+body{
     font-family: 'Roboto', sans-serif;
-    background-color: #2c3e50;
-    background-repeat: no-repeat;
+    background-color: #2c3e50;;
     color: #2c3e50;
     line-height: 1;
     margin: 0;
@@ -75,21 +74,30 @@ input[type="submit"]:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
+button {
+    text-align: center;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #4c6b89, #2c3e50);
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 h2, h3 {
     text-align: center;
     color: #2c3e50;
     font-size: 1.8rem;
     margin-top: 15px;
-}
-
-
-.result {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    color: #27ae60;
-    margin-top: 30px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
 }
 
 .green {
@@ -145,6 +153,20 @@ h2, h3 {
 
 .error {
     color: white;
+}
+
+.more-info {
+    color: #2c3e50;
+    background-color: rgb(245, 245, 245);
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none; /* Remove the underline */
 }
 
 /* Responsive Design */

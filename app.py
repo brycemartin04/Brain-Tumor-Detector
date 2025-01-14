@@ -14,6 +14,17 @@ model = YOLO("runs/detect/V2-BW/weights/best.pt")
 previous_image = None
 previous_prediction = None
 
+def get_info(index):
+    if index == 0:
+        info = 'Glioma is a growth of cells that starts in the brain or spinal cord. The cells in a glioma look similar to healthy brain cells called glial cells. Glial cells surround nerve cells and help them function. As a glioma grows it forms a mass of cells called a tumor. The tumor can grow to press on brain or spinal cord tissue and cause symptoms. Symptoms depend on which part of the brain or spinal cord is affected.'
+        return info
+    elif index == 1:
+        info = 'A meningioma is a tumor that grows from the membranes that surround the brain and spinal cord, called the meninges. A meningioma is not a brain tumor, but it may press on the nearby brain, nerves and vessels. Meningioma is the most common type of tumor that forms in the head. Most meningiomas grow very slowly. They can grow over many years without causing symptoms. But sometimes, their effects on nearby brain tissue, nerves or vessels may cause serious disability.'
+        return info
+    elif index == 2:
+        info = "Pituitary tumors are unusual growths that develop in the pituitary gland. This gland is an organ about the size of a pea. It's located behind the nose at the base of the brain. Some of these tumors cause the pituitary gland to make too much of certain hormones that control important body functions. Others can cause the pituitary gland to make too little of those hormones. Most pituitary tumors are benign. That means they are not cancer. Another name for these noncancerous tumors is pituitary adenomas. Most adenomas stay in the pituitary gland or in the tissue around it, and they grow slowly. They typically don't spread to other parts of the body."
+        return info
+
 def cleanup_temp_folder():
     """Clean up all files in the static/temp folder on app close."""
     temp_folder = 'static/temp'
@@ -44,6 +55,7 @@ atexit.register(cleanup_temp_folder)
 def index():
     labels = ''
     status = ''
+    info = ''
     image_url = None
     confidence = None
     predicted_image_path= None
@@ -88,13 +100,18 @@ def index():
                     labels = "No Cancer Detected"
 
                 if labels == 1:
+                    info = get_info(1)
                     labels = 'Meningioma'
                 elif labels == 2:
+                    info = get_info(2)
                     labels = "Pituitary"
                 elif labels == 0:
+                    info = get_info(0)
                     labels = "Glioma"
 
-            
+
+                
+
 
                 # Get the predicted image from YOLO result (use OpenCV to work with the image)
                 predicted_image = results[0].plot(labels=True, conf=False)  # Plot the predictions onto the image
@@ -116,7 +133,7 @@ def index():
 
             
     
-    return render_template('index.html', result=labels, status = status, predicted_image_path=predicted_image_path, confidence=confidence)
+    return render_template('index.html', result=labels, status = status,info=info, predicted_image_path=predicted_image_path, confidence=confidence)
 
 if __name__ == "__main__":
     app.run(debug=True)
